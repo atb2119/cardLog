@@ -5,9 +5,9 @@ const NavBar = ({ handleOpen }) => {
   return (
     <Box sx={{ width: "100%", display: "flex" }}>
       <AppBar position="static">
-        <Toolbar sx={{ justifyContent: "flex-end", bgcolor: "blue" }}>
-          <Button variant="contained" onClick={handleOpen}>
-            click me
+        <Toolbar sx={{ justifyContent: "flex-end" }}>
+          <Button variant="contained" color="secondary" onClick={handleOpen}>
+            Inventory
           </Button>
         </Toolbar>
       </AppBar>

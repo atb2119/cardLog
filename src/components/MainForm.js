@@ -12,19 +12,23 @@ import {
 import DateAdapter from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
+import Package from "./Package";
+
+//todo - combine forminput and this into one component, no longer need to be separate
 
 const MainForm = (props) => {
-  const { inventory, setInventory } = props;
+  const { inventory, setInventory, fakeDB, setFakeDB } = props;
   const [localEpNum, setLocalEpNum] = useState(0);
-  const [direction, setDirection] = useState("send");
-  const [date, setDate] = useState(new Date());
+  const [epName, setEpName] = useState("");
+  const [date, setDate] = useState(new Date().toDateString());
+  const [tracking, setTracking] = useState("");
 
   const handleEpNumChange = (e) => {
     setLocalEpNum(e.target.value);
   };
 
-  const handleToggle = (e, d) => {
-    setDirection(d);
+  const handleEpNameChange = (e) => {
+    setEpName(e.target.value);
   };
 
   return (
@@ -33,29 +37,33 @@ const MainForm = (props) => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          alignItems: "flex-start",
           width: "100%",
-          padding: "2em",
+          marginTop: "1em",
+          alignItems: "center",
         }}
       >
-        <Box>
-          <ToggleButtonGroup
-            exclusive
-            value={direction}
-            onChange={handleToggle}
-            size="large"
-          >
-            <ToggleButton value={"send"}>SEND</ToggleButton>
-            <ToggleButton value={"receive"}>RECEIVE</ToggleButton>
-          </ToggleButtonGroup>
-        </Box>
-        <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "flex-end",
+          }}
+        >
           <TextField
             id="quantity"
-            label="Episode #"
+            label="Ep#"
             variant="standard"
             value={localEpNum > 0 ? localEpNum : ""}
             onChange={handleEpNumChange}
+            size="small"
+            sx={{ width: "10%", marginRight: "1%" }}
+          />
+          <TextField
+            id="name"
+            label="Episode Name"
+            variant="standard"
+            value={epName}
+            onChange={handleEpNameChange}
             size="small"
           />
           <DesktopDatePicker
@@ -79,6 +87,18 @@ const MainForm = (props) => {
           setInventory={setInventory}
           inventory={inventory}
           pos={true}
+          date={date}
+          epnum={localEpNum}
+        />
+        <Package
+          inventory={inventory}
+          epNum={localEpNum}
+          date={date}
+          fakeDB={fakeDB}
+          setFakeDB={setFakeDB}
+          epName={epName}
+          tracking={tracking}
+          setTracking={setTracking}
         />
       </Box>
     </LocalizationProvider>

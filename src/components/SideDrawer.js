@@ -17,7 +17,8 @@ const SideDrawer = ({ drawerOpen, handleClose, inventory }) => {
   // }, []);
 
   return (
-    <Box sx={{ display: "flex" }} key={inventory}>
+    // <Box sx={{ display: "flex" }} key={inventory}>
+    <Box sx={{ display: "flex" }}>
       <Drawer variant="persistent" anchor="right" open={drawerOpen}>
         <Box
           sx={{
@@ -44,12 +45,13 @@ const SideDrawer = ({ drawerOpen, handleClose, inventory }) => {
               marginTop: "1em",
             }}
           >
-            <Typography paragraph>XQD: {total(inventory.XQD)}</Typography>
+            <h1>Temp</h1>
+            {/* <Typography paragraph>XQD: {total(inventory.XQD)}</Typography>
             <Typography paragraph>SD: {total(inventory.SD)}</Typography>
             <Typography paragraph>
               MicroSD: {total(inventory.MicroSD)}
             </Typography>
-            <Typography paragraph>CF: {total(inventory.CF)}</Typography>
+            <Typography paragraph>CF: {total(inventory.CF)}</Typography> */}
           </Box>
         </Paper>
       </Drawer>

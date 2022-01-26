@@ -15,10 +15,18 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 import { useState } from "react";
 
+//todo - combine this and mainform into one component, no longer need to be separate
+
 const FormInput = ({ inventory, setInventory, pos }) => {
   const [localQuant, setLocalQuant] = useState(0);
   const [localSize, setLocalSize] = useState(0);
   const [localType, setLocalType] = useState("");
+
+  const resetForm = () => {
+    setLocalQuant(0);
+    setLocalSize(0);
+    setLocalType("");
+  };
 
   const handleQuantChange = (e) => {
     setLocalQuant(e.target.value);
@@ -127,10 +135,12 @@ const FormInput = ({ inventory, setInventory, pos }) => {
       <Button
         onClick={() => {
           handleSubmit(localType);
-          console.log(inventory);
+          resetForm();
         }}
+        variant="contained"
+        sx={{ marginLeft: "1em" }}
       >
-        Submit
+        Add to package
       </Button>
     </Box>
   );

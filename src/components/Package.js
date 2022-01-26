@@ -18,7 +18,33 @@ Send button - submit to fake DB, reset form
 Notes section
 */
 
-const Package = ({ inventory, setInventory }) => {
+const Package = ({
+  inventory,
+  setInventory,
+  fakeDB,
+  setFakeDB,
+  epNum,
+  date,
+  epName,
+  tracking,
+  setTracking,
+}) => {
+  const handleSetTracking = (e) => {
+    setTracking(e.target.value);
+  };
+
+  const handleSubmit = () => {
+    const obj = { ...inventory };
+    obj["date"] = date;
+    obj["epnum"] = epNum;
+    obj["epName"] = epName;
+    obj["tracking"] = tracking;
+    const fakeFakeDB = { ...fakeDB };
+    fakeFakeDB.sent.push(obj);
+    setFakeDB(fakeFakeDB);
+    console.log(fakeDB);
+  };
+
   //function to pull positive values out of inventory - lol this is terrible, refacator this
   const extract = (inv) => {
     const extracted = [];
@@ -63,7 +89,12 @@ const Package = ({ inventory, setInventory }) => {
               {rows.map((row, i) => (
                 <TableRow
                   key={i}
-                  //sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  sx={{
+                    "&:last-child td, &:last-child th": { border: 0 },
+                    borderTop: 2,
+                    borderBottom: 1,
+                    background: "#b4ff92",
+                  }}
                 >
                   <TableCell component="th" scope="row">
                     {row[0]}
@@ -71,7 +102,10 @@ const Package = ({ inventory, setInventory }) => {
                   <TableCell>{row[1]}</TableCell>
                   <TableCell>{row[2]}</TableCell>
                   <TableCell sx={{ align: "right" }}>
-                    <Button onClick={() => reset(row[0], row[1])}>
+                    <Button
+                      variant="contained"
+                      onClick={() => reset(row[0], row[1])}
+                    >
                       Remove
                     </Button>
                   </TableCell>
@@ -80,7 +114,25 @@ const Package = ({ inventory, setInventory }) => {
             </TableBody>
           </Table>
         </TableContainer>
-        <Button>SEND!</Button>
+
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-around",
+            alignItems: "center",
+          }}
+        >
+          <TextField
+            value={tracking}
+            onChange={handleSetTracking}
+            label="Tracking#"
+            size="small"
+          />
+          <Button variant="contained" onClick={handleSubmit}>
+            SEND!
+          </Button>
+        </Box>
       </Paper>
     </Box>
   );
