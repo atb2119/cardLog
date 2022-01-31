@@ -119,8 +119,9 @@ const Package = ({
           sx={{
             display: "flex",
             flexDirection: "column",
-            justifyContent: "space-around",
+            justifyContent: "space-between",
             alignItems: "center",
+            padding: "1em 1em 1em 1em",
           }}
         >
           <TextField

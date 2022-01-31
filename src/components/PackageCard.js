@@ -13,7 +13,7 @@ import {
 needs: ep num, send date, package inventory
 */
 
-const PackageCard = ({ epnum, date, epName }) => {
+const PackageCard = ({ epnum, date, epName, tracking }) => {
   return (
     <Card elevation={4} sx={{ minWidth: 275, margin: ".5em" }}>
       <CardContent>
@@ -26,7 +26,7 @@ const PackageCard = ({ epnum, date, epName }) => {
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           Sent: {date}
         </Typography>
-        <Typography variant="body2">Tracking #: 1234567890</Typography>
+        <Typography variant="body2">Tracking #: {tracking}</Typography>
       </CardContent>
       <CardActions>
         <Button size="small">See Contents</Button>
